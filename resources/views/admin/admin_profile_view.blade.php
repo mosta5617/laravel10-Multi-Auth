@@ -30,6 +30,10 @@
               <label class="tx-11 fw-bolder mb-0 text-uppercase">Address:</label>
               <p class="text-muted">{{ $profile_data->address }}</p>
             </div>
+            <div class="mt-3">
+              <label class="tx-11 fw-bolder mb-0 text-uppercase">Since:</label>
+              <p class="text-muted">{{ $profile_data->created_at }}</p>
+            </div>
             <div class="mt-3 d-flex social-links">
               <a href="javascript:;" class="btn btn-icon border btn-xs me-2">
                 <i data-feather="github"></i>
@@ -85,10 +89,7 @@
 
         </div>
       </div>
-      <!-- middle wrapper end -->
-      <!-- right wrapper start -->
 
-      <!-- right wrapper end -->
     </div>
 
         </div>
