@@ -34,7 +34,7 @@
                         </div>
                         <div class="mt-3">
                             <label class="tx-11 fw-bolder mb-0 text-uppercase">Since:</label>
-                            <p class="text-muted">{{ $profile_data->created_at }}</p>
+                            <p class="text-muted">{{ $profile_data->updated_at }}</p>
                         </div>
                         <div class="mt-3 d-flex social-links">
                             <a href="javascript:;" class="btn btn-icon border btn-xs me-2">
@@ -61,7 +61,7 @@
 
                                     <h6 class="card-title">Basic Form</h6>
 
-                                    <form class="forms-sample" method="POST" action="">
+                                    <form class="forms-sample" method="POST" action="{{ route('admin.profile.store') }}" enctype="multipart/form-data" >
                                         @csrf
                                         <div class="mb-3">
                                             <label for="exampleInputUsername1" class="form-label">Username</label>
