@@ -10,6 +10,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <div class="d-flex align-items-center">
+                               
+                                {{-- Image set if not empty or not --}}
                                 <img class="wd-100 rounded-circle"
                                     src="{{ !empty($profile_data->photo) ? url('upload/admin-images/' . $profile_data->photo) : url('upload/no-image.jpg') }}"
                                     alt="profile">
@@ -59,7 +61,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h6 class="card-title">Update Admin Profile</h6>
+                                    <h4 class="card-title">Update Admin Profile</h4>
 
                                     <form class="forms-sample" method="POST" action="{{ route('admin.profile.store') }}" enctype="multipart/form-data" >
                                         @csrf
