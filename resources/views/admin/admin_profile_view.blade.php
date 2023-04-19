@@ -12,6 +12,7 @@
                             <div class="d-flex align-items-center">
                                
                                 {{-- Image set if not empty or not --}}
+                                
                                 <img class="wd-100 rounded-circle"
                                     src="{{ !empty($profile_data->photo) ? url('upload/admin-images/' . $profile_data->photo) : url('upload/no-image.jpg') }}"
                                     alt="profile">
