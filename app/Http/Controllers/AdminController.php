@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function AdminDashboard(){
-        return view('admin.index');
+        $id= Auth::user()->id;
+        $profile_data= User::find($id);
+        return view('admin.index', compact('profile_data'));
 
     }
 
