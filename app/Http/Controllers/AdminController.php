@@ -11,7 +11,11 @@ class AdminController extends Controller
     public function AdminDashboard(){
         $id= Auth::user()->id;
         $profile_data= User::find($id);
-        return view('admin.index', compact('profile_data'));
+        $notification = array(
+            'message' => 'You have successfully loged out ',
+            'alert-type' => 'success'
+        );
+        return view('admin.index', compact('profile_data'))->with($notification);
 
     }
 
@@ -22,11 +26,20 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        $notification = array(
+            'message' => 'User Logout successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect('/admin/login')->with($notification);
     }
 
     public function AdminLogin(){
-        return view('admin.admin_login');
+        $notification = array(
+            'message' => 'You have successfully loged in ',
+            'alert-type' => 'success'
+        );
+        return view('admin.admin_login')->with($notification);
 
     }
 
@@ -53,7 +66,11 @@ class AdminController extends Controller
         }
 
         $data->save();
-        return redirect()->back();
+        $notification = array(
+            'message' => 'You profile updated successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
 
     }
 
