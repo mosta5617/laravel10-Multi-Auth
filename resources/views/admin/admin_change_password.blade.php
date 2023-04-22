@@ -16,6 +16,14 @@
 
                                     <h6 class="card-title">Change Admin Password</h6>
 
+                                    @if (count($errors))
+                                        @foreach ($errors->all() as $error)
+                                            <p class="alert alert-danger alert-dismissible fade show">
+                                                {{ $error }}
+                                            </p>
+                                        @endforeach
+                                    @endif
+
                                     <form class="forms-sample" method="POST" action="{{ route('admin.password.store') }}" >
                                         @csrf
                                         <div class="mb-3">
