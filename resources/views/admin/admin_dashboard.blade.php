@@ -69,6 +69,7 @@
         </div>
     </div>
 
+    
     <!-- core:js -->
     <script src="{{ asset('/assets/vendors/core/core.js') }}"></script>
     <!-- endinject -->
