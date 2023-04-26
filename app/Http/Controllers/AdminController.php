@@ -18,7 +18,7 @@ class AdminController extends Controller
         );
         return view('admin.index', compact('profile_data'))->with($notification);
 
-    }
+    } // End AdminDashboard method
 
     public function AdminLogout(Request $request){
         Auth::guard('web')->logout();
@@ -33,7 +33,9 @@ class AdminController extends Controller
         );
 
         return redirect('/admin/login')->with($notification);
-    }
+
+    } // End AdminLogout method
+
 
     public function AdminLogin(){
         $notification = array(
@@ -42,13 +44,14 @@ class AdminController extends Controller
         );
         return view('admin.admin_login')->with($notification);
 
-    }
+    } // End AdminLogin method
 
     public function AdminProfile(){
         $id= Auth::user()->id;
         $profile_data= User::find($id);
         return view('admin.admin_profile_view', compact('profile_data'));   
-    }
+
+    } // End AdminProfile method
 
     public function AdminProfileStore(Request $request){
         $id= Auth::user()->id;
@@ -61,6 +64,9 @@ class AdminController extends Controller
 
         if($request->file('photo')){
             $file=$request->file('photo');
+
+            @unlink(public_path('upload/admin-images/'. $data->photo));
+
             $filename =date('YmdHi').$file->getClientOriginalName();
             $file->move(public_path('upload/admin-images'),$filename);
             $data['photo']=$filename;
@@ -73,13 +79,15 @@ class AdminController extends Controller
         );
         return redirect()->back()->with($notification);
 
-    }
+    } // End AdminProfileStore method
+
 
     public function AdminPassword(){
         $id= Auth::user()->id;
         $profile_data= User::find($id);
         return view('admin.admin_change_password', compact('profile_data'));
-    }
+
+    } //End AdminPassword method
 
 
     public function AdminPasswordStore(Request $request)
@@ -89,21 +97,31 @@ class AdminController extends Controller
             'new_password' => 'required',
             'confirm_password' => 'required|same:new_password',
         ]);
-        $hashedPassword = Auth::user()->password;
-        if(Hash::check($request->old_password, $hashedPassword )){
-            $users= User::find(Auth::id());
-            $users->password = bcrypt($request->new_password);
-            $users->save();
-            session()->flash('message', 'Password Changed Successfully');     
-            return redirect()->back();
-        } else{
-            session()->flash('message', 'Old Password is not matched');
-            return redirect()->back();
+
+        // Match the old password
+        if(!Hash::check($request->old_password, Auth::user()->password )){
+            $notification = array(
+                'message' => 'Old Password not Matched',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
         }
 
-    } //End method
+        // Update the new password
+
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+            $notification = array(
+                'message' => 'Password Changed Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+ 
+    } //End AdminPasswordStore method
 
 
     
 
-} //End Class
+} //End AdminController Class

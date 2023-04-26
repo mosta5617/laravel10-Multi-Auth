@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
             <!-- left wrapper end -->
             <!-- middle wrapper start -->
             <div class="col-md-8 col-xl-8 middle-wrapper">
@@ -61,7 +61,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h6 class="card-title">Update Admin Profile</h6>
+                                    <h6 class="card-title"> Admin Update Profile</h6> <br>
 
                                     <form class="forms-sample" method="POST" action="{{ route('admin.profile.store') }}" enctype="multipart/form-data" >
                                         @csrf
