@@ -60,7 +60,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h6 class="card-title"> Admin Change Password</h6> <br> 
+                                    <h6 class="card-title"> Admin Change Password !</h6> <br> 
 
                                     @if (count($errors))
                                         @foreach ($errors->all() as $error)
