@@ -47,9 +47,8 @@ Route::middleware(['auth', 'role:admin'] )->group(function(){
         Route::get('/admin/change/password', 'AdminPassword')->name('admin.change.password');
         Route::post('/admin/update/password', 'AdminPasswordStore')->name('admin.password.store');
     });
-    
-});
 
+});
 
 
 Route::middleware(['auth', 'role:agent'] )->group(function(){
