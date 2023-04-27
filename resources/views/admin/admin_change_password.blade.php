@@ -9,10 +9,12 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <div class="d-flex align-items-center">
-                               
-    {{-- Image set if not empty or not --}}
 
-    <img class="wd-100 rounded-circle" src="{{ !empty($profile_data->photo) ? url('upload/admin-images/' . $profile_data->photo) : url('upload/no-image.jpg') }}" alt="profile">
+                                {{-- Image set if not empty or not --}}
+
+                                <img class="wd-100 rounded-circle"
+                                    src="{{ !empty($profile_data->photo) ? url('upload/admin-images/' . $profile_data->photo) : url('upload/no-image.jpg') }}"
+                                    alt="profile">
 
                             </div>
                             <h6 class="card-title mb-0">{{ $profile_data->username }}</h6>
@@ -50,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <!-- left wrapper end -->
             <!-- middle wrapper start -->
             <div class="col-md-8 col-xl-8 middle-wrapper">
@@ -60,7 +62,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h6 class="card-title"> Admin Change Password !</h6> <br> 
+                                    <h6 class="card-title"> Admin Change Password !</h6> <br>
 
                                     @if (count($errors))
                                         @foreach ($errors->all() as $error)
@@ -70,26 +72,23 @@
                                         @endforeach
                                     @endif
 
-                                    <form class="forms-sample" method="POST" action="{{ route('admin.password.store') }}" >
+                                    <form class="forms-sample" method="POST" action="{{ route('admin.password.store') }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="oldpassword" class="form-label">Old Password</label>
-                                            <input type="password" class="form-control" name="old_password"
-                                                id="oldpassword" autocomplete="off"
-                                                value="">
-                                        </div>  
+                                            <input type="password" class="form-control" name="old_password" id="oldpassword"
+                                                autocomplete="off" value="">
+                                        </div>
                                         <div class="mb-3">
                                             <label for="newpassword" class="form-label">New Password</label>
-                                            <input type="password" class="form-control" name="new_password"
-                                                id="newpassword" autocomplete="off"
-                                                value="">
-                                        </div>  
+                                            <input type="password" class="form-control" name="new_password" id="newpassword"
+                                                autocomplete="off" value="">
+                                        </div>
                                         <div class="mb-3">
                                             <label for="confirmpassword" class="form-label">Confirm Password</label>
                                             <input type="password" class="form-control" name="confirm_password"
-                                                id="confirmpassword" autocomplete="off"
-                                                value="">
-                                        </div>  
+                                                id="confirmpassword" autocomplete="off" value="">
+                                        </div>
 
                                         <button type="submit" class="btn btn-primary me-2">Change Password</button>
 

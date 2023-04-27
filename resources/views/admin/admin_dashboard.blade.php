@@ -17,15 +17,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- End fonts -->
-
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('/assets/vendors/core/core.css') }}">
     <!-- endinject -->
-
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
     <!-- End plugin css for this page -->
-
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('/assets/fonts/feather-font/css/iconfont.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
@@ -33,10 +30,8 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('/assets/css/demo2/style.css') }}">
     <!-- End layout styles -->
-
    <!-- toastar cdn  -->
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-
     <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
 
 </head>
@@ -73,7 +68,6 @@
     <!-- core:js -->
     <script src="{{ asset('/assets/vendors/core/core.js') }}"></script>
     <!-- endinject -->
-
     <!-- Plugin js for this page -->
     <script src="{{ asset('/assets/vendors/chartjs/Chart.min.js') }}"></script>
     <script src="{{ asset('/assets/vendors/jquery.flot/jquery.flot.js') }}"></script>
@@ -81,17 +75,14 @@
     <script src="{{ asset('/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
     <!-- End plugin js for this page -->
-
     <!-- inject:js -->
     <script src="{{ asset('/assets/vendors/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('/assets/js/template.js') }}"></script>
     <!-- endinject -->
-
     <!-- Custom js for this page -->
     <script src="{{ asset('/assets/js/dashboard-dark.js') }}"></script>
     <script src="{{ asset('/assets/js/datepicker.js') }}"></script>
     <!-- End custom js for this page -->
-
     <!-- Start Toastr CDN js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
