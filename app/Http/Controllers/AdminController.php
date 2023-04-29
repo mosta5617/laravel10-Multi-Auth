@@ -122,6 +122,11 @@ class AdminController extends Controller
     } //End AdminPasswordStore method
 
 
+    public function AdminPicture(){
+
+        return view('admin.admin_picture');
+
+    } //End AdminPicture method
     
 
 } //End AdminController Class

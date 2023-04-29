@@ -149,9 +149,9 @@
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
-                            <a href="javascript:;" class="text-body ms-0">
+                            <a href="{{ route('admin.picture') }}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="repeat"></i>
-                                <span>Switch User</span>
+                                <span>Admin Picture</span>
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
