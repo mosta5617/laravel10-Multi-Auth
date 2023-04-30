@@ -104,12 +104,38 @@
 
         <h2>Uploaded Images:</h2>
         <div class="row">
-          @foreach ($uploaded_images as $uploaded_image)
-            {{ $uploaded_image->user_id }}
-            <img class="wd-100 rounded-circle" src="{{ url('upload/multi-images/' . $uploaded_image->image) }}" alt="profile">
-          @endforeach
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">SL#</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Path</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+             @php
+                $i=1;
+             @endphp
+            @foreach ($uploaded_images as $uploaded_image)
+              <tbody>
+                <tr>
+                  <th scope="row">{{ $i++ }}</th>
+                  <td> {{ $uploaded_image->user_name }} </td>
+                  <td> {{ $uploaded_image->path }} </td>
+                  <td>  <img class="wd-100 rounded-circle" src="{{ url('upload/multi-images/' . $uploaded_image->image) }}" alt="profile"></td>
+                  <td> 
+                    <span class="badge bg-warning"><a href="{{ $uploaded_image->id }}" class="">View</a></span>
+                    <span class="badge bg-success"> <a href="{{ $uploaded_image->id }}" class="">Edit</a></span>
+                    <span class="badge bg-danger"> <a href="{{ $uploaded_image->id }}" class="">Delete</a></span>
+                   </td>
+                </tr>
+              </tbody>
+              @endforeach
+            </table>
+          
         </div>
-        
+
       </div>
     </div>
     <!-- /.card -->
