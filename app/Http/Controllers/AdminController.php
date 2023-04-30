@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\MultiImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -128,5 +129,38 @@ class AdminController extends Controller
 
     } //End AdminPicture method
     
+
+public function StoreMultiImage(Request $request)
+{
+    $request->validate([
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $path = $image->storeAs('upload/multi-images', $filename);
+
+            $image->move(public_path('upload/multi-images'),$filename);
+            
+            $imageModel = new MultiImage();
+            $imageModel->user_name = Auth()->user()->name;
+            $imageModel->image = $filename;
+            $imageModel->path = $path;
+            $imageModel->save();
+        }
+
+        $notification = array(
+            'message' => 'Images uploaded successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+
+    } //End StoreMultiImage method
+
+
+
 
 } //End AdminController Class

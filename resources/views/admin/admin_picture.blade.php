@@ -36,29 +36,26 @@
 
     <!-- Start fontawesome css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Start Dropzone css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" type="text/css" />
     
 
     <link rel="shortcut icon" href="{{ asset('../../../assets/images/favicon.png') }}" />
-    <style>
-        #my-dropzone {
-  border: 2px dashed #ccc;
-  padding: 20px;
-  min-height: 100px;
-}
 
-#my-dropzone .dz-preview {
-  display: inline-block;
-  margin: 10px;
-}
+<style>
+  .preview-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 5px;
 
-#my-dropzone .dz-error-message {
-  color: red;
-}
+  }
 
-    </style>
+
+</style>
+
 </head>
 
 <body>
@@ -73,33 +70,49 @@
                                 <div class="col-md-12">
                                   <div class="card card-default">
                                     <div class="card-header">
-                                      <h3 class="card-title">Dropzone.js <small><em>jQuery File Upload</em> like look</small></h3>
+                                      <h3 class="card-title">Upload Multiple Image</h3>
                                     </div>
 
                                      {{-- Start card-body css --}}
-                                    <div class="card-body">
-                                        <form action="/upload" method="post" enctype="multipart/form-data" class="">
-                                            <div id="my-dropzone" class="dropzone"></div>
-                                            <button type="submit">Submit</button>
-                                          </form>
-                                    </div>
-                                    {{-- End card-body css --}}
-                                    <!-- /.card-body -->
-                                    <div class="card-footer">
-                                      Visit <a href="https://www.dropzonejs.com">dropzone.js documentation</a> for more examples and information about the plugin.
-                                    </div>
-                                  </div>
-                                  <!-- /.card -->
-                                </div>
-                              </div>
-                            
-                        </div>
-                    </div>
-                </div>
+<div class="card-body">
 
-            </div>
+  <form method="POST" action="{{ route('store.multi.image') }}" enctype="multipart/form-data" >
+    @csrf
+    <div class="col-lg-12">
+        <div class="mb-3">
+          <input class="form-control" type="file" name="images[]" id="imageUpload" multiple>
         </div>
-        <div id="image-container"></div>
+        
+            <div id="imagePreview" class="rounded"></div> <br>
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn-success mb-3">Upload Images</button>
+        </div>
+    </div>
+  </form>   
+ 
+
+      {{-- Image preview --}}
+
+
+</div> 
+
+      <!-- /.card-body -->
+      <div class="card-footer">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere dolores similique corrupti quod error itaque optio porro nam explicabo aut sed harum nobis temporibus aliquam soluta assumenda, quos ducimus maxime.
+      </div>
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+      
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+      
     </div>
 
     <!-- core:js -->
@@ -123,37 +136,56 @@
     
     <!-- End custom js for this page -->
     
-    <script>
- Dropzone.autoDiscover = false;
-var myDropzone = new Dropzone("#my-dropzone", {
-  url: "/upload",
-  maxFiles: 3, // Maximum number of files
-  maxFilesize: 2, // Maximum file size in MB
-  previewsContainer: "#my-dropzone", // Show preview in the Dropzone container
-  accept: function(file, done) {
-    var images = [];
-    for (var i = 0; i < myDropzone.files.length; i++) {
-      images.push(myDropzone.files[i].name);
+<script>
+const imageUpload = document.getElementById('imageUpload');
+const imagePreview = document.getElementById('imagePreview');
+const maxUploads = 5; // maximum number of allowed uploads
+let uploaded = 0; // current number of uploaded files
+
+imageUpload.addEventListener('change', () => {
+  // check if maximum number of uploads has been reached
+  if (imageUpload.files.length + uploaded > maxUploads) {
+    alert(`Maximum of ${maxUploads} uploads allowed.`);
+    imageUpload.value = ''; // clear file input
+    return;
+  }
+
+  imagePreview.innerHTML = '';
+  for (const file of imageUpload.files) {
+    // check if file is an image
+    if (!file.type.startsWith('image/')) {
+      alert('Only image files are allowed.');
+      continue;
     }
-    if (images.indexOf(file.name) === -1) {
-      done();
-    } else {
-      done("This image is a duplicate.");
-      myDropzone.removeFile(file);
-    }
+
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.classList.add('preview-image');
+
+    // add cancel button
+    const cancelButton = document.createElement('button');
+    const cancelIcon = document.createElement('i');
+    cancelIcon.classList.add('fas', 'fa-times');
+    cancelButton.appendChild(cancelIcon);
+    cancelButton.classList.add('cancel-button');
+    cancelButton.addEventListener('click', () => {
+      uploaded--; // decrement uploaded counter
+      imagePreview.removeChild(div);
+    });
+
+    // create container div for image and cancel button
+    const div = document.createElement('div');
+    div.appendChild(img);
+    div.appendChild(cancelButton);
+    imagePreview.appendChild(div);
+
+    uploaded++; // increment uploaded counter
   }
 });
 
-myDropzone.on("error", function(file, message) {
-  if (message.includes("File is too big")) {
-    alert("File size exceeds the maximum limit of 2 MB.");
-    myDropzone.removeFile(file); // Remove the file from Dropzone
-  }
-});
 
 
-
-    </script>
+</script>
 </body>
 
 </html>
