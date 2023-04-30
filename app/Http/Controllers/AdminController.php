@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\MultiImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -124,8 +125,9 @@ class AdminController extends Controller
 
 
     public function AdminPicture(){
-
-        return view('admin.admin_picture');
+        $userid=Auth::id();
+        $uploaded_images=MultiImage::where('user_id', $userid)->get();
+        return view('admin.admin_picture', compact('uploaded_images'));
 
     } //End AdminPicture method
     
@@ -144,7 +146,8 @@ public function StoreMultiImage(Request $request)
             $image->move(public_path('upload/multi-images'),$filename);
             
             $imageModel = new MultiImage();
-            $imageModel->user_name = Auth()->user()->name;
+            $imageModel->user_id = Auth::user()->id;
+            $imageModel->user_name = Auth::user()->name;
             $imageModel->image = $filename;
             $imageModel->path = $path;
             $imageModel->save();
@@ -153,6 +156,12 @@ public function StoreMultiImage(Request $request)
         $notification = array(
             'message' => 'Images uploaded successfully.',
             'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification, $image);
+    }else{
+        $notification = array(
+            'message' => 'Please select an Image',
+            'alert-type' => 'warning'
         );
         return redirect()->back()->with($notification);
     }

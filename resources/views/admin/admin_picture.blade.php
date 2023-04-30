@@ -40,6 +40,7 @@
 
     <!-- Start Dropzone css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" type="text/css" />
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     
 
     <link rel="shortcut icon" href="{{ asset('../../../assets/images/favicon.png') }}" />
@@ -99,7 +100,16 @@
 
       <!-- /.card-body -->
       <div class="card-footer">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere dolores similique corrupti quod error itaque optio porro nam explicabo aut sed harum nobis temporibus aliquam soluta assumenda, quos ducimus maxime.
+       
+
+        <h2>Uploaded Images:</h2>
+        <div class="row">
+          @foreach ($uploaded_images as $uploaded_image)
+            {{ $uploaded_image->user_id }}
+            <img class="wd-100 rounded-circle" src="{{ url('upload/multi-images/' . $uploaded_image->image) }}" alt="profile">
+          @endforeach
+        </div>
+        
       </div>
     </div>
     <!-- /.card -->
@@ -133,6 +143,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 
     <!-- Custom js for this page -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     <!-- End custom js for this page -->
     
@@ -184,6 +195,23 @@ imageUpload.addEventListener('change', () => {
 });
 
 
+  @if (Session::has('message'))
+      var type = "{{ Session::get('alert-type', 'info') }}"
+      switch (type) {
+          case 'info':
+              toastr.info("{{ Session::get('message') }}");
+              break;
+          case 'success':
+              toastr.success("{{ Session::get('message') }}");
+              break;
+          case 'warning':
+              toastr.warning("{{ Session::get('message') }}");
+              break;
+          case 'error':
+              toastr.error("{{ Session::get('message') }}");
+              break;
+      }
+  @endif
 
 </script>
 </body>
