@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 class AdminController extends Controller
 {
     public function AdminDashboard(){
@@ -140,8 +141,10 @@ public function StoreMultiImage(Request $request)
 
     if ($request->hasFile('images')) {
         foreach ($request->file('images') as $image) {
-            $filename = time() . '_' . $image->getClientOriginalName();
+            $filename = time() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('upload/multi-images', $filename);
+
+            //$img=Image::make($image)->resize(220,220);
 
             $image->move(public_path('upload/multi-images'),$filename);
             
