@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         [
             'name' => 'Admin',
             'username' => 'admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'test1@gmail.com',
             'password' => Hash::make('111'),
             'role' => 'admin',
             'status' => 'active',
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         [
             'name' => 'Agent',
             'username' => 'agent',
-            'email' => 'agent@gmail.com',
+            'email' => 'test2@gmail.com',
             'password' => Hash::make('111'),
             'role' => 'agent',
             'status' => 'active',
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'User',
                 'username' => 'user',
-                'email' => 'user@gmail.com',
+                'email' => 'test3@gmail.com',
                 'password' => Hash::make('111'),
                 'role' => 'user',
                 'status' => 'active',
